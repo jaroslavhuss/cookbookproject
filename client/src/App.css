@@ -374,3 +374,38 @@ margin:auto;
 .vypisReceptu .row .obsah{
   padding:10px;
 }
+.detail-receptu{
+  width:900px;
+  display:block;
+  margin:auto;
+  max-width:100%;
+  padding:10px;
+}
+.detail-receptu img{
+  border-radius:12px;
+  border:2px solid grey;
+  max-width: 100%;
+}
+.detail-receptu .rest{
+  padding:0px 20px;
+}
+.detail-receptu h4,h3{
+  margin:10px 0px;
+  color:purple;
+  font-weight: bold;
+  font-size:20px;
+}
+.detail-receptu .flex-row{
+  display: flex;
+ 
+  align-items:flex-start;
+}
+.detail-receptu .suroviny div{
+  display: inline-block;
+  font-size: 12px;
+  font-style: italic;
+  padding: 3px 4px;
+  border-radius: 4px;
+  margin: 3px 5px;
+  box-shadow: 15px 8px 2pc -9px;
+}
