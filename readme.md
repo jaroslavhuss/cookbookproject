@@ -18,3 +18,9 @@ Pak je potřeba udělat poslední věc.
 3. Obsah pro .env vám dám osobně, aby nám nikdo neojebal DB. Bez .env backend nebude fungovat
 
 Mám otestované, že to pak funguje out of the box. 
+
+# Jak nastartovat appku?
+
+1. V současné verzi musíte jít do složky server2 a tam spustit `npm run dev` - tento script nastartuje oba systémy - backend a frontend.
+
+Jarda
