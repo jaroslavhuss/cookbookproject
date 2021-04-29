@@ -6,7 +6,6 @@ const menu = () => {
             <ul>
                 <li><Link to="/">Vyhledat recept</Link></li>
                 <li><Link to="/add-recipe">Přidat recept</Link></li>
-                <li>Registrace</li>
             </ul>
         </div>
     )

@@ -32,7 +32,9 @@ const DetailReceptu = () => {
             <div className="suroviny">
                 {vyhledaneRecepty.data?vyhledaneRecepty.data[zvolenyRecept].suroviny.map((surovina, index) => {
                     return(<div key={index}>
-                        {surovina.name}({(surovina.mnozstvi)*porce}g)
+                        {
+                            surovina.mnozstvi===0?surovina.name+ " (dle chuti)":
+                        surovina.name + " ("+((surovina.mnozstvi)*porce +"g)")}
                     </div>)
                 }):<></>}
             </div>
