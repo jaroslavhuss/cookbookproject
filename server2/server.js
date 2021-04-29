@@ -1,15 +1,17 @@
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 5000;
-const {dbConnect} = require("./databse/connect");
-const saveRecipe = require("./routes/saveRecipe");
-const saveSurovinu = require("./routes/saveSurovina");
-const getSuroviny = require("./routes/getSurovina");
-const getRecept = require("./routes/getRecept");
+const db = require("./databse/connect");
+const getSuroviny = require("./routes/GET/recieveMaterials");
+const saveRecipe = require("./routes/POST/saveRecipe");
+const saveSurovinu = require("./routes/POST/saveSurovina");
+const getRecept = require("./routes/POST/getRecept");
 const cors = require("cors");
+const recieveMaterials = require("./routes/GET/recieveMaterials");
 
 /**
  * MIDDLEWARE
+ * Povoluje komunikaci skrze JSON a text
  */
 
  app.use(express.text({ extended: false }));
@@ -20,14 +22,14 @@ const cors = require("cors");
  * 
  * S databází opatrně při vývoji, raději používejte dummy data! 
  */
-new dbConnect().connect();
+db.connect();
 
 /**
  * ROUTY POST
  */
 app.use("/",cors(), saveRecipe);
 app.use("/",cors(), saveSurovinu);
-app.use("/",cors(), getSuroviny);
+app.use("/",cors(), recieveMaterials);
 app.use("/",cors(), getRecept);
 
 /**
@@ -38,7 +40,7 @@ app.get("/", (req,res) => {
 })
 
 /**
- * Běh serveru
+ * Nastartuje server a vypíše všechny routy
  */
 app.listen(PORT, (err) => {
     if(err) throw new Error("Server nebylo možné nastartovat");
@@ -64,7 +66,7 @@ app.listen(PORT, (err) => {
         },
         { 
          Popis: "Získá seznam všech surovin",
-         URL:"http://localhost:5000/get-suroviny",
+         URL:"http://localhost:5000/recieve-materials",
          Metoda: "GET" 
         },
         

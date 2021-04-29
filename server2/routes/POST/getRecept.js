@@ -1,5 +1,5 @@
 const getRecept = require("express").Router();
-const recept = require("../models/recept");
+const recept = require("../../models/recept");
 
 getRecept.post("/get-recept",(req,res) => {
     recept.find({ 'fullText' : { '$regex' : req.body.fullText, '$options' : 'i' } }, (err,documents) => {

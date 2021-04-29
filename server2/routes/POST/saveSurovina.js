@@ -1,5 +1,5 @@
 const saveSurovina = require("express").Router();
-const Surovina = require("../models/surovina");
+const Surovina = require("../../models/surovina");
 saveSurovina.post("/save-surovina", async (req,res) => {
     const {name} = req.body;
     const ulozeniSuroviny = new Surovina({

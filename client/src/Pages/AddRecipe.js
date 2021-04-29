@@ -29,14 +29,15 @@ const AddRecipe = () => {
     /**
      * @description Získá seznam jednotlivých surovin z databáze
      */
-    const getVsechnySuroviny = async () => {
-      zapnutiVypnutiPaneluSVyberemSuroviny(true);
-   fetch("http://localhost:5000/get-suroviny").then((data) => {
-       return data.json();
-   }).then(({data}) => {
-       setSuroviny(data);
-   })
-  }
+     const getVsechnySuroviny = async () => {
+        zapnutiVypnutiPaneluSVyberemSuroviny(true);
+     fetch("http://localhost:5000/get-suroviny").then((data) => {
+         return data.json();
+     }).then(({data}) => {
+         
+         setSuroviny(data);
+     })
+    }
 
   /**
    * 
