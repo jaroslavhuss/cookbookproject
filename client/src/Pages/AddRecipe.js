@@ -31,7 +31,7 @@ const AddRecipe = () => {
      */
      const getVsechnySuroviny = async () => {
         zapnutiVypnutiPaneluSVyberemSuroviny(true);
-     fetch("http://localhost:5000/get-suroviny").then((data) => {
+     fetch("http://localhost:5000/recieve-materials").then((data) => {
          return data.json();
      }).then(({data}) => {
          
