@@ -1,11 +1,13 @@
 {
-  "name": "theProject",
+  "name": "cookbook-project",
   "version": "1.0.0",
-  "description": "Ke spuštění projektu jsou potřeba 3 věci",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "instalace": "npm install --prefix ./server2  && npm install --prefix ./client && echo '\n\n\nNyní použijte následující kód:\ncd server2 && npm run dev' ",
-    "dev":"npm run dev --prefix server2"
+    "deps": "npm install --prefix ./server2 && npm install --prefix ./client",
+    "start:server": "npm run --prefix ./server2 start",
+    "start:client": "npm run --prefix ./client start",
+    "start": "npm run start:server && npm run start:client"
   },
   "keywords": [],
   "author": "",

@@ -11,7 +11,7 @@ const SerpSearch = () => {
     const submit = () => {
         if(searchField.length > 2){
             setErrMessage("")
-        fetch("http://localhost:5000/get-recept", {
+        fetch("http://localhost:5000/get-receipt", {
         method: 'post',
         headers: {
           'Accept': 'application/json, text/plain, */*',
@@ -45,14 +45,14 @@ const SerpSearch = () => {
         }}>
             <Link to="/"><img width="150" src={img} alt="Official logo" /></Link>
             <input type="text" onInput={(e) => {
-           
+
                 setSearchField(e.target.value)
-            
+
             }} value={searchField}/>
            <div className="btn-section">
                <input type="submit" className="vyhledat" value="Vyhledat"/>
            </div>
-           
+
         </form>
         <p>{errMessage}</p>
         </div>
