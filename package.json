@@ -4,7 +4,8 @@
   "description": "Ke spuštění projektu jsou potřeba 3 věci",
   "main": "index.js",
   "scripts": {
-    "instalace": "npm install --prefix ./server2  && npm install --prefix ./client && echo '\n\n\nNyní použijte následující kód:\ncd server2 && npm run dev' "
+    "instalace": "npm install --prefix ./server2  && npm install --prefix ./client && echo '\n\n\nNyní použijte následující kód:\ncd server2 && npm run dev' ",
+    "dev":"npm run dev --prefix server2"
   },
   "keywords": [],
   "author": "",
