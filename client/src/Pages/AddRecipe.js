@@ -23,7 +23,7 @@ const AddRecipe = () => {
     const [nahledovyObrazek, setNahledovyObrazek] = useState(""); //URL náhledového obrázku
     const [suroviny, setSuroviny] = useState([]); //Seznam všech surovin, použitých v receptu
     const [soucetGramaze, setSoucetGramaze] = useState(0);
-    
+
 
     const [msgZeServeru, setMsgZeServeru] = useState("");
     /**
@@ -34,13 +34,13 @@ const AddRecipe = () => {
      fetch("http://localhost:5000/recieve-materials").then((data) => {
          return data.json();
      }).then(({data}) => {
-         
+
          setSuroviny(data);
      })
     }
 
   /**
-   * 
+   *
    * @param array Pole objektů
    * @description Přepočítá sumu všech aktivně přidaných surovin
    */
@@ -51,7 +51,7 @@ const AddRecipe = () => {
 }
 
 /**
- * 
+ *
  * @param e event object
  * @description Umístí do globálního contextu nové množství určité suroviny
  */
@@ -70,7 +70,7 @@ const AddRecipe = () => {
       prepocitejGramaz(vybraneSuroviny);
     }
   }
- 
+
   /**
    * @param e event objekt
    * @description smaze z globálního contextu (statu) zvolenou surovinu a přepočítá
@@ -161,7 +161,7 @@ const AddRecipe = () => {
  {mnozstvi: 0, name: "kmín"}
      ])
     }
-  
+
   //Test animace
   const pridejTridu = (e) => {
       const parent = e.target.parentElement;
@@ -174,7 +174,7 @@ const AddRecipe = () => {
 
     return (
        <div className="layout">
-          {zapniPanelSVyberemSurovin?<VyberSurovin vybranesuroviny={vybraneSuroviny} suroviny={suroviny}/>:<></>} 
+          {zapniPanelSVyberemSurovin?<VyberSurovin vybranesuroviny={vybraneSuroviny} suroviny={suroviny}/>:<></>}
            <div className="column" style={{
                   height:"90vh",
                    overflow: "scroll"
@@ -184,7 +184,7 @@ const AddRecipe = () => {
                     <div className="add-recipe">
                         <div className="card">
                             <label htmlFor="nazev-receptu"><h3><BiReceipt/> Název receptu</h3></label>
-                            <input placeholder="Použijte výstižné jméno pro recept" type="text" onInput={(e) => setNazevReceptu(e.target.value)} value={nazevReceptu}/>
+                            <input placeholder="Použijte výstižné jméno pro receipt" type="text" onInput={(e) => setNazevReceptu(e.target.value)} value={nazevReceptu}/>
                         </div>
                         <div className="card">
                             <label htmlFor="popis"><h3><BiPencil/> Popis</h3></label>
@@ -207,7 +207,7 @@ const AddRecipe = () => {
                                 backgroundSize:"contain",
                                 backgroundRepeat:"no-repeat",
                                 backgroundPosition:"right top",
-                                
+
                             }}>
                             <label htmlFor="popis"><h3><BiImage/> Náhledový obrázek</h3></label>
                             <input onInput={(e) => {
@@ -229,14 +229,14 @@ const AddRecipe = () => {
                                getVsechnySuroviny()
                            }} className="btn btn-add-item"><BiAddToQueue /> Přidat surovinu</div>
                            <br />
-                           <div className="btn btn-prefil-item" onClick={dummyVyplneniReceptu}><BiWinkTongue /> Předvyplnit recept</div>
+                           <div className="btn btn-prefil-item" onClick={dummyVyplneniReceptu}><BiWinkTongue /> Předvyplnit receipt</div>
                         </div>
-                        
+
                     </div>
-              
-                    <div className="btn btn-save-item" onClick={ulozitReceptDoDatabaze}><BiSave /> Uložit recept</div>
+
+                    <div className="btn btn-save-item" onClick={ulozitReceptDoDatabaze}><BiSave /> Uložit receipt</div>
                     <p className="serverMsg">{msgZeServeru.msg}</p>
-                 
+
                </div>
            </div>
        </div>

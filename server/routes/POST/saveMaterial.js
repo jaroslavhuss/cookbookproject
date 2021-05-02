@@ -1,5 +1,5 @@
 const saveMaterial = require("express").Router();
-const Materials = require("../../models/Materials");
+const Materials = require("../../models/materials");
 saveMaterial.post("/save-material", async (req,res) => {
     const {name} = req.body;
     const saveMaterial = new Materials({

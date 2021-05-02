@@ -10,7 +10,7 @@ const Search = () => {
     const submit = () => {
         if(searchField.length>2){
             setErrMessage("");
-        fetch("http://localhost:5000/get-recept", {
+        fetch("http://localhost:5000/get-receipt", {
         method: 'post',
         headers: {
           'Accept': 'application/json, text/plain, */*',
@@ -44,15 +44,15 @@ const Search = () => {
         }}>
             <img width="300" src={img} alt="Official logo" />
             <input type="text" onInput={(e) => {
-              
+
                  setSearchField(e.target.value)
-          
+
             }} value={searchField}/>
            <div className="btn-section">
                <input type="submit" className="vyhledat" value="Vyhledat Recept"/>
                <p>{errMessage}</p>
            </div>
-           
+
         </form>
     )
 }

@@ -1,12 +1,11 @@
 const mongoose = require("mongoose");
-const recept = new mongoose.Schema({
+const recipe = new mongoose.Schema({
     nazevReceptu:{
         type:String,
     },
     popis:{
         type:String,
     },
-    
     dobaPripravy:{
      type:String,
     },
@@ -22,6 +21,6 @@ const recept = new mongoose.Schema({
     fullText:{
         type:String
     }
-})
+});
 
-module.exports = mongoose.model("Recipe", recept);
+module.exports = mongoose.model("Recipe", recipe);
