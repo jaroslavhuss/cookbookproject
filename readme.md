@@ -24,6 +24,6 @@ Mám otestované, že to pak funguje out of the box.
 
 ## Jak nastartovat appku?
 
-1. V současné verzi musíte jít do složky server2 a tam spustit `npm run dev` - tento script nastartuje oba systémy - backend a frontend.
+1. Pak už je jedno, jestli hodíte `npm run dev` v kořenové složce nebo ve složce server2
 
 Jarda
