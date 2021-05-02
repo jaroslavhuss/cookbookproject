@@ -1,6 +1,5 @@
 const Mongoose = require("mongoose");
-const dotenv = require("dotenv")
-
+const dotenv = require("dotenv");
 class dbConnect {
     connect(){
         dotenv.config();

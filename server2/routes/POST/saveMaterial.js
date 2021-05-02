@@ -1,12 +1,12 @@
-const saveSurovina = require("express").Router();
-const Surovina = require("../../models/surovina");
-saveSurovina.post("/save-surovina", async (req,res) => {
+const saveMaterial = require("express").Router();
+const Materials = require("../../models/Materials");
+saveMaterial.post("/save-material", async (req,res) => {
     const {name} = req.body;
-    const ulozeniSuroviny = new Surovina({
-        nazevSuroviny:name
+    const saveMaterial = new Materials({
+        materialName:name
     })
     //Nejdřív najdi, zda už taková surovina neexistuje
-  Surovina.findOne({"nazevSuroviny":name}, (err,data) => {
+  Materials.findOne({"materialName":name}, (err,data) => {
       if(err){
          return res.json({
               msg:"Bohužel došlo k neznámě chybě nebo server nekomunikuje s DB"
@@ -19,7 +19,7 @@ saveSurovina.post("/save-surovina", async (req,res) => {
           })
       }else{
           //Jinak ji tady na klid uložíme
-          ulozeniSuroviny.save((err,msg) => {
+          saveMaterial.save((err,msg) => {
               if(msg._id){
              return res.json({
                   msg:"Surovina byla úspěšně uložena v našem seznamu!"
@@ -33,4 +33,4 @@ saveSurovina.post("/save-surovina", async (req,res) => {
       }
   })
 })
-module.exports = saveSurovina;
+module.exports = saveMaterial;

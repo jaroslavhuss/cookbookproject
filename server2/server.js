@@ -2,12 +2,11 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 5000;
 const db = require("./databse/connect");
-const getSuroviny = require("./routes/GET/recieveMaterials");
 const saveRecipe = require("./routes/POST/saveRecipe");
-const saveSurovinu = require("./routes/POST/saveSurovina");
+const saveMaterial = require("./routes/POST/saveMaterial");
 const getRecept = require("./routes/POST/getRecept");
-const cors = require("cors");
 const recieveMaterials = require("./routes/GET/recieveMaterials");
+const cors = require("cors");
 
 /**
  * MIDDLEWARE
@@ -28,7 +27,7 @@ db.connect();
  * ROUTY POST
  */
 app.use("/",cors(), saveRecipe);
-app.use("/",cors(), saveSurovinu);
+app.use("/",cors(), saveMaterial);
 app.use("/",cors(), recieveMaterials);
 app.use("/",cors(), getRecept);
 
@@ -56,7 +55,7 @@ app.listen(PORT, (err) => {
         },
         { 
          Popis: "Uloží surovinu, pokud ještě neexistuje",
-         URL:"http://localhost:5000/save-surovina",
+         URL:"http://localhost:5000/save-material",
          Metoda: "POST" 
         },
         { 

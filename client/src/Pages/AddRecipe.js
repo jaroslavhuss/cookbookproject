@@ -127,7 +127,6 @@ const AddRecipe = () => {
           return msg.json();
       }).then((msg) => {
           setMsgZeServeru(msg);
-          console.log(msg)
           if(msg.msg === "Recept byl úspěšně uložen"){
              window.location.reload();
           }

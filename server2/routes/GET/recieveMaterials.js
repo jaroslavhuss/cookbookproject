@@ -1,8 +1,8 @@
 const recieveMaterials = require("express").Router();
-const Surovina = require("../../models/surovina");
+const Materials = require("../../models/Materials");
 
 recieveMaterials.get("/recieve-materials", async (req,res) => {
-   Surovina.find({}, (err,docs) => {
+   Materials.find({}, (err,docs) => {
          if(err){
            return  res.json({
                  msg:"Server není připojený k databázi"

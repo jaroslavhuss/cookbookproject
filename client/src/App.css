@@ -46,11 +46,7 @@
     border: 1px solid gainsboro;
     border-radius: 28px;
   width:100%;
-  margin:0px 10px;
-
-   
-
-   
+  margin:0px 10px; 
 }
 .search-area .vyhledat, .btn{
   margin-top: 20px;
@@ -60,7 +56,8 @@
   color: white;
   border-radius: 4px;
   font-weight: bold;
-  border:none
+  border:none;
+  cursor:pointer;
 }
 .serp-area input[type="submit"]{
   border: none;
@@ -338,14 +335,7 @@ z-index:100;
   font-weight: bold;
 
 }
-.serverMsg{
-  text-align: center;
-  font-size: 12px;
-  margin-top: 10px;
-  color: grey;
-  font-weight: bold;
-  font-style: italic;
-}
+
 .vypisReceptu{
 max-width:1100px;
 margin:auto;
@@ -408,4 +398,12 @@ margin:auto;
   border-radius: 4px;
   margin: 3px 5px;
   box-shadow: 15px 8px 2pc -9px;
+}
+.serverMsg{
+  text-align: center;
+  font-size: 12px;
+  margin-top: 10px;
+  color: grey;
+  font-weight: bold;
+  font-style: italic;
 }

@@ -10,7 +10,7 @@ const PridejSurovinu = ({zavri}) => {
     const ulozSurovinuNaServerADoAppky = () => {
         setShowButton(false);
         setMsgZeServeru("Ukládám... chvilku strpení");
-        fetch("http://localhost:5000/save-surovina",{
+        fetch("http://localhost:5000/save-material",{
             method: 'post',
             headers: {
               'Accept': 'application/json, text/plain, */*',

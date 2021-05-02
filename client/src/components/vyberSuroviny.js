@@ -9,10 +9,11 @@ const {zapnutiVypnutiPaneluSVyberemSuroviny,vyberSurovinu} = useContext(GlobalCo
 const [inputState, setInputState] = useState("");
 useEffect(() => {
     const filtered = suroviny.filter( function( el ) {
+
         const vybraneSuroviny = vybranesuroviny.map((surovina) => {
             return surovina.name;
         })
-        return vybraneSuroviny.indexOf( el.nazevSuroviny ) < 0;
+        return vybraneSuroviny.indexOf( el.materialName ) < 0;
       } );
     setSeznamSurovin(filtered);
     return () => {
@@ -25,14 +26,14 @@ const hledejSuroviny = (e) => {
     setInputState(value)
     const regExp = new RegExp(value,"gi");
     const search = suroviny.filter((item) => {
-        return item.nazevSuroviny.match(regExp);
+        return item.materialName.match(regExp);
     })
    setSeznamSurovin(search);
 }
 
 const vymazZvoleneSurovinyZNabidky = (item) => {
     const cistaData = seznamSurovin.filter((polozka) => {
-        return item.name !== polozka.nazevSuroviny
+        return item.name !== polozka.materialName
     })
     setSeznamSurovin(cistaData);
 }
@@ -54,13 +55,13 @@ return (
                     return(
                         <div onClick={() => {
                             const object = {
-                                name:seznamSurovin[index].nazevSuroviny,
+                                name:seznamSurovin[index].materialName,
                                 mnozstvi:0
                             }
                             vyberSurovinu(object);
                             vymazZvoleneSurovinyZNabidky(object)
                         
-                        }} className="surovina" key={index}>{surovina.nazevSuroviny}</div>
+                        }} className="surovina" key={index}>{surovina.materialName}</div>
                     )
                 })}
                 </div>
