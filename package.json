@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deps": "npm install --prefix ./server2 && npm install --prefix ./client",
-    "start:server": "npm run --prefix ./server2 start",
+    "deps": "npm install --prefix ./server && npm install --prefix ./client",
+    "start:server": "npm run --prefix ./server start",
     "start:client": "npm run --prefix ./client start",
     "start": "npm run start:server && npm run start:client"
   },
