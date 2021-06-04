@@ -6,6 +6,8 @@ import Menu from "./components/menu";
 import AddRecipe from "./Pages/AddRecipe";
 import SERP from "./Pages/Serp";
 import DeatilReceptu from "./components/DetailReceptu";
+import AdminPanel from "./Pages/AdminPanel";
+import UpdateRecipe from "./Pages/UpdateRecipe";
 import { GlobalProvider } from "./context/GlobalContext";
 const App = () => {
   return (
@@ -17,6 +19,8 @@ const App = () => {
       <Route exact path="/add-recipe"  component={AddRecipe}/>
       <Route exact path="/search-engine-result-page"  component={SERP}/>
       <Route exact path="/detail-receptu"  component={DeatilReceptu}/>
+      <Route exact path="/admin-panel"  component={AdminPanel}/>
+      <Route exact path="/update-recipe"  component={UpdateRecipe}/>
     </Switch>
    </BrowserRouter>
    </GlobalProvider>

@@ -1,17 +1,44 @@
 import React, {useContext, useState} from 'react'
 import { GlobalContext } from '../context/GlobalContext'
 import { BiTime, BiBookHeart, BiCookie } from "react-icons/bi";
+import {useHistory} from "react-router-dom"
 
 const DetailReceptu = () => {
+    const history = useHistory();
     const {vyhledaneRecepty,zvolenyRecept} = useContext(GlobalContext);
     const [porce, setPorce] = useState(1);
+    const [message, setMessage] = useState("");
+    const smazatRecept = () => {
+   
+         fetch("http://localhost:5000/delete-recipe",{
+                method: 'post',
+                headers: {
+                  'Accept': 'application/json, text/plain, */*',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({_id:vyhledaneRecepty.data[zvolenyRecept]._id})
+              }).then((data) => {
+                  return data.json();
+              }).then((finalMessage) => {
+                  console.log(finalMessage);
+                  if(finalMessage.msg==="Recept byl smazán"){
+                    setMessage(finalMessage.msg);
+                  }else{
+                      setMessage("Tento recept nemohl být smazán")
+                  }
+                  
+              })
+    }
+    const aktualizaceReceptu = () => {
+        history.push("/update-recipe")
+    }
     return (
        
         <div className="detail-receptu">
              {vyhledaneRecepty.data?<>
             <h1>{vyhledaneRecepty.data?vyhledaneRecepty.data[zvolenyRecept].nazevReceptu:<></>}</h1>
             <div className="flex-row">
-                <div className="img"><div>{vyhledaneRecepty.data?<img width="200" src={vyhledaneRecepty.data[zvolenyRecept].nahledovyObrazek} alt={vyhledaneRecepty.data[zvolenyRecept].nahledovyObrazek}/>:<></>}</div>
+                <div className="img"><div>{vyhledaneRecepty.data?<img style={{minWidth:200}} width="200" src={vyhledaneRecepty.data[zvolenyRecept].nahledovyObrazek} alt={vyhledaneRecepty.data[zvolenyRecept].nahledovyObrazek}/>:<></>}</div>
             </div>
                 <div className="rest"><h4><BiTime /> Doba přípravy</h4>
             <p>{vyhledaneRecepty.data?vyhledaneRecepty.data[zvolenyRecept].dobaPripravy:<></>}</p>
@@ -38,10 +65,19 @@ const DetailReceptu = () => {
                     </div>)
                 }):<></>}
             </div>
+        
             </div>
             
             </div>
             </>:<>Bohužel se nám nepodařilo žádná data načíst</>}
+            <div className="custom-row">
+                <div onClick={smazatRecept} className="btn">Smazat tento recept</div>
+                <div onClick={aktualizaceReceptu} className="btn">Aktualizovat tento recept</div>
+                
+            </div>
+            <div className="custom-row">
+            <div className="neco">{message}</div>
+            </div>
         </div>
     )
 }

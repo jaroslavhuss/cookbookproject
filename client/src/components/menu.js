@@ -5,7 +5,7 @@ const menu = () => {
         <div className="top-menu">
             <ul>
                 <li><Link to="/">Vyhledat recept</Link></li>
-                <li><Link to="/add-recipe">Přidat recept</Link></li>
+                <li><Link to="/admin-panel">Admin panel</Link></li>
             </ul>
         </div>
     )

@@ -407,3 +407,11 @@ margin:auto;
   font-weight: bold;
   font-style: italic;
 }
+.custom-row{
+  display:flex;
+width:100%;
+  justify-content: center;
+}
+.custom-row .btn{
+margin-right:20px;
+}

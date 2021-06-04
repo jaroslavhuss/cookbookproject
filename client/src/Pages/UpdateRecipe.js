@@ -1,10 +1,10 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 import {  BiReceipt, BiPencil,BiTime, BiAddToQueue, BiSave, BiImage, BiListPlus, BiWinkTongue} from "react-icons/bi";
 import { Editor } from "@tinymce/tinymce-react";
 import VyberSurovin from "../components/vyberSuroviny";
 import { GlobalContext } from '../context/GlobalContext';
 
-const AddRecipe = () => {
+const UpdateRecipe = () => {
     /**
      * Globální staty a globální funkce (setry, getry)
      */
@@ -12,19 +12,20 @@ const AddRecipe = () => {
         zapniPanelSVyberemSurovin,
         zapnutiVypnutiPaneluSVyberemSuroviny,
         vybraneSuroviny,
-        setVybraneSuroviny
+        setVybraneSuroviny,
+        vyhledaneRecepty,
+        zvolenyRecept
     } = useContext(GlobalContext);
     /**
      * Staty které souvisí s uložením celého formuláře
      */
-    const [nazevReceptu, setNazevReceptu] = useState(""); //Nadpis receptu, název receptu
-    const [editorState, seteditorState] = useState(""); //Popis receptu, vrací HTML
-    const [dobaPripravy, setDobaPripravy] = useState(""); //Doba přípravy state
-    const [nahledovyObrazek, setNahledovyObrazek] = useState(""); //URL náhledového obrázku
-    const [suroviny, setSuroviny] = useState([]); //Seznam všech surovin, použitých v receptu
-    const [soucetGramaze, setSoucetGramaze] = useState(0);
-
-
+ 
+    const [nazevReceptu, setNazevReceptu] = useState(vyhledaneRecepty.data[zvolenyRecept].nazevReceptu); //Nadpis receptu, název receptu
+    const [editorState, seteditorState] = useState(vyhledaneRecepty.data[zvolenyRecept].popis); //Popis receptu, vrací HTML
+    const [dobaPripravy, setDobaPripravy] = useState(vyhledaneRecepty.data[zvolenyRecept].dobaPripravy); //Doba přípravy state
+    const [nahledovyObrazek, setNahledovyObrazek] = useState(vyhledaneRecepty.data[zvolenyRecept].nahledovyObrazek); //URL náhledového obrázku
+    const [suroviny, setSuroviny] = useState(vyhledaneRecepty.data[zvolenyRecept].suroviny); //Seznam všech surovin, použitých v receptu
+    const [soucetGramaze, setSoucetGramaze] = useState(vyhledaneRecepty.data[zvolenyRecept].soucetGramaze);
     const [msgZeServeru, setMsgZeServeru] = useState("");
     /**
      * @description Získá seznam jednotlivých surovin z databáze
@@ -83,8 +84,9 @@ const AddRecipe = () => {
       prepocitejGramaz(vybraneSuroviny);
   }
 
-  const ulozitReceptDoDatabaze = () => {
+  const aktualizovatRecept = () => {
       const schemaObjektu = {
+          _id:vyhledaneRecepty.data[zvolenyRecept]._id,
           nazevReceptu:nazevReceptu,
           popis:editorState,
           dobaPripravy:dobaPripravy,
@@ -116,7 +118,7 @@ const AddRecipe = () => {
       }else if(schemaObjektu.suroviny.length <=0){
           setMsgZeServeru({msg:"Žádné suroviny nebyly přidány - prosím, přidejte všechny suroviny, která do receptu patří."})
       }else{
-      fetch("http://localhost:5000/save-recipe",{
+      fetch("http://localhost:5000/update-recipe",{
         method: 'post',
         headers: {
           'Accept': 'application/json, text/plain, */*',
@@ -127,7 +129,7 @@ const AddRecipe = () => {
           return msg.json();
       }).then((msg) => {
           setMsgZeServeru(msg.msg)
-          if(msg.msg === "Recept byl úspěšně uložen"){
+          if(msg.msg === "Recept byl úspěšně aktualizován"){
             setNazevReceptu("");
             setSuroviny([]);
             setNahledovyObrazek("");
@@ -135,7 +137,7 @@ const AddRecipe = () => {
             seteditorState("");
             setSoucetGramaze(0);
             setVybraneSuroviny([]);
-            setMsgZeServeru("Recept byl úspěšně uložen");
+            setMsgZeServeru("Recept byl úspěšně aktualizován");
           }
       }).catch((err) => {
           if(err){
@@ -144,30 +146,9 @@ const AddRecipe = () => {
       })
     }
   }
-
-  const dummyVyplneniReceptu = () => {
-      setNazevReceptu("Jihočeský Guláš");
-      seteditorState(`<p><strong style="box-sizing: border-box; color: #333333; font-family: 'Roboto Condensed', sans-serif; font-size: 14px; background-color: #ffffff;">Postup:</strong></p>
-      <p style="box-sizing: border-box; margin: 0px 0px 10px; color: #333333; font-family: 'Roboto Condensed', sans-serif; font-size: 14px; background-color: #ffffff;">1. Na s&aacute;dle orestujeme dozlatova na drobn&eacute; kostičky nakr&aacute;jenou oči&scaron;těnou cibuli<br style="box-sizing: border-box;" />2. Přid&aacute;me mletou červenou papriku, ihned vlož&iacute;me kostky osolen&eacute;ho a pepřem okořeněn&eacute;ho masa, podus&iacute;me ve vlastn&iacute; &scaron;ť&aacute;vě<br style="box-sizing: border-box;" />3. Opečen&eacute; maso podlijeme horkou vodou, okořen&iacute;me km&iacute;nem a rozdrcen&yacute;m česnekem a dus&iacute;me doměkka<br style="box-sizing: border-box;" />4. Do hotov&eacute;ho gul&aacute;&scaron;e vm&iacute;ch&aacute;me je&scaron;tě rajsk&yacute; protlak a přid&aacute;me podu&scaron;enou anglickou slaninu nakr&aacute;jenou na pl&aacute;tky<br style="box-sizing: border-box;" />5. Okořen&iacute;me drcen&yacute;m cel&yacute;m pepřem a cca 5 minut v&scaron;e povař&iacute;me.</p>
-      <p><strong style="box-sizing: border-box; color: #333333; font-family: 'Roboto Condensed', sans-serif; font-size: 14px; background-color: #ffffff;">Doporučen&iacute;:</strong></p>
-      <p style="box-sizing: border-box; margin: 0px 0px 10px; color: #333333; font-family: 'Roboto Condensed', sans-serif; font-size: 14px; background-color: #ffffff;">Takto připraven&yacute; gul&aacute;&scaron; serv&iacute;rujeme s du&scaron;enou r&yacute;ž&iacute;.</p>`)
-     setDobaPripravy("140 minut");
-     setNahledovyObrazek("https://www.jcted.cz/public/temp/photos/articles/54358/813842_300_285.jpg?lm=1611925219");
-     setVybraneSuroviny([
-{mnozstvi: 600, name: "hovězí maso"},
- {mnozstvi: 200, name: "cibule"},
- {mnozstvi: 100, name: "sádlo"},
- {mnozstvi: 10, name: "rajčatový protlak"},
- {mnozstvi: 10, name: "česnek"},
- {mnozstvi: 100, name: "mouka"},
- {mnozstvi: 5, name: "sladká paprika"},
- {mnozstvi: 300, name: "čerstvé houby"},
- {mnozstvi: 0, name: "sůl"},
- {mnozstvi: 0, name: "pepř"},
- {mnozstvi: 0, name: "sušená majoránka"},
- {mnozstvi: 0, name: "kmín"}
-     ])
-    }
+useEffect(() => {
+    setVybraneSuroviny(vyhledaneRecepty.data[zvolenyRecept].suroviny) 
+}, [])
 
   //Test animace
   const pridejTridu = (e) => {
@@ -178,7 +159,6 @@ const AddRecipe = () => {
     const parent = e.target.parentElement;
     parent.setAttribute("class","polozka")
   }
-
     return (
        <div className="layout">
           {zapniPanelSVyberemSurovin?<VyberSurovin vybranesuroviny={vybraneSuroviny} suroviny={suroviny}/>:<></>}
@@ -187,7 +167,7 @@ const AddRecipe = () => {
                    overflow: "scroll"
            }}>
              <div className="recipe-canvas">
-                 <h1>Přidání receptu</h1>
+                 <h1>Aktualizace receptu {vyhledaneRecepty.data[zvolenyRecept]._id}</h1>
                     <div className="add-recipe">
                         <div className="card">
                             <label htmlFor="nazev-receptu"><h3><BiReceipt/> Název receptu</h3></label>
@@ -236,12 +216,11 @@ const AddRecipe = () => {
                                getVsechnySuroviny()
                            }} className="btn btn-add-item"><BiAddToQueue /> Přidat surovinu</div>
                            <br />
-                           <div className="btn btn-prefil-item" onClick={dummyVyplneniReceptu}><BiWinkTongue /> Předvyplnit recept</div>
-                        </div>
+                     </div>
 
                     </div>
 
-                    <div className="btn btn-save-item" onClick={ulozitReceptDoDatabaze}><BiSave /> Uložit recept</div>
+                    <div className="btn btn-save-item" onClick={aktualizovatRecept}><BiSave /> Aktualizovat recept</div>
                     <p className="serverMsg">{msgZeServeru}</p>
 
                </div>
@@ -250,4 +229,4 @@ const AddRecipe = () => {
     )
 }
 
-export default AddRecipe
+export default UpdateRecipe
