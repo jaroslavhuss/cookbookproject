@@ -4,8 +4,7 @@ const AdminPanel = () => {
     return (
         <div className="custom-row">
             <Link to="/add-recipe" className="btn">Vytvořit recept</Link>
-            <Link to="/update-recipe" className="btn">Aktualizovat recept</Link>
-            <div className="btn">Chci spravovat suroviny</div>
+            <Link to="/admin-materials" className="btn">Chci spravovat suroviny</Link>
         </div>
     )
 }

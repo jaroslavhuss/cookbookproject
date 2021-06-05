@@ -8,6 +8,7 @@ import SERP from "./Pages/Serp";
 import DeatilReceptu from "./components/DetailReceptu";
 import AdminPanel from "./Pages/AdminPanel";
 import UpdateRecipe from "./Pages/UpdateRecipe";
+import AdminMaterials from "./Pages/AdminMaterials"
 import { GlobalProvider } from "./context/GlobalContext";
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <Route exact path="/detail-receptu"  component={DeatilReceptu}/>
       <Route exact path="/admin-panel"  component={AdminPanel}/>
       <Route exact path="/update-recipe"  component={UpdateRecipe}/>
+      <Route exact path="/admin-materials"  component={AdminMaterials}/>
     </Switch>
    </BrowserRouter>
    </GlobalProvider>

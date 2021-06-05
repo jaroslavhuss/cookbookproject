@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react'
-import {  BiReceipt, BiPencil,BiTime, BiAddToQueue, BiSave, BiImage, BiListPlus, BiWinkTongue} from "react-icons/bi";
+import {  BiReceipt, BiPencil,BiTime, BiAddToQueue, BiSave, BiImage, BiListPlus} from "react-icons/bi";
 import { Editor } from "@tinymce/tinymce-react";
 import VyberSurovin from "../components/vyberSuroviny";
 import { GlobalContext } from '../context/GlobalContext';
@@ -148,7 +148,7 @@ const UpdateRecipe = () => {
   }
 useEffect(() => {
     setVybraneSuroviny(vyhledaneRecepty.data[zvolenyRecept].suroviny) 
-}, [])
+},[])
 
   //Test animace
   const pridejTridu = (e) => {

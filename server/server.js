@@ -9,7 +9,8 @@ const getRecept = require("./routes/POST/getRecept");
 const recieveMaterials = require("./routes/GET/recieveMaterials");
 const deleteRecipe = require("./routes/POST/deleteRecipe");
 const updateRecipe = require("./routes/POST/updateRecipe")
-
+const updateMaterial = require("./routes/POST/updateMaterial");
+const deleteMaterial = require("./routes/POST/deleteMaterial");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -37,7 +38,9 @@ app.use(cors(), saveMaterial);
 app.use(cors(), recieveMaterials);
 app.use(cors(), getRecept);
 app.use(cors(), deleteRecipe);
-app.use(cors(), updateRecipe)
+app.use(cors(), updateRecipe);
+app.use(cors(), updateMaterial);
+app.use(cors(), deleteMaterial);
 
 /**
  * Nastartuje server a vypíše všechny routy
