@@ -9,25 +9,28 @@ const DetailReceptu = () => {
     const [porce, setPorce] = useState(1);
     const [message, setMessage] = useState("");
     const smazatRecept = () => {
-   
-         fetch("http://localhost:5000/delete-recipe",{
-                method: 'post',
-                headers: {
-                  'Accept': 'application/json, text/plain, */*',
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({_id:vyhledaneRecepty.data[zvolenyRecept]._id})
-              }).then((data) => {
-                  return data.json();
-              }).then((finalMessage) => {
-                  console.log(finalMessage);
-                  if(finalMessage.msg==="Recept byl smazán"){
-                    setMessage(finalMessage.msg);
-                  }else{
-                      setMessage("Tento recept nemohl být smazán")
-                  }
-                  
-              })
+ const consent =  window.confirm("Opravdu si přejete smazat tento recept?")
+ if(consent){
+    fetch("http://localhost:5000/delete-recipe",{
+        method: 'post',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({_id:vyhledaneRecepty.data[zvolenyRecept]._id})
+      }).then((data) => {
+          return data.json();
+      }).then((finalMessage) => {
+          console.log(finalMessage);
+          if(finalMessage.msg==="Recept byl smazán"){
+            setMessage(finalMessage.msg);
+          }else{
+              setMessage("Tento recept nemohl být smazán")
+          }
+          
+      })
+ }
+        
     }
     const aktualizaceReceptu = () => {
         history.push("/update-recipe")

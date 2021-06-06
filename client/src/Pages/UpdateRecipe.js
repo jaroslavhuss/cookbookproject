@@ -146,8 +146,11 @@ const UpdateRecipe = () => {
       })
     }
   }
+  // eslint-disable-next-line 
 useEffect(() => {
-    setVybraneSuroviny(vyhledaneRecepty.data[zvolenyRecept].suroviny) 
+    // eslint-disable-next-line 
+    setVybraneSuroviny(vyhledaneRecepty.data[zvolenyRecept].suroviny);
+    // eslint-disable-next-line 
 },[])
 
   //Test animace

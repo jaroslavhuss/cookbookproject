@@ -18,11 +18,17 @@ saveRecipe.post("/update-recipe", async (req,res) => {
           };
       const data = await recipe.findOneAndUpdate({_id:_id}, update);
      
-    console.log(data)
-
-      return res.json({
-        msg:"Recept byl úspěšně aktualizován"
-      });
+   
+if(data){
+  return res.status(200).json({
+    msg:"Recept byl úspěšně aktualizován"
+  });
+}else{
+  return res.status(406).json({
+    msg:"Recept nebyl bohužel aktualizován"
+  })
+}
+      
     } catch (error) {
       res.json({msg: 'Bohužel došlo k neznáme chybě - server se nepřipojil asi k DB'});
     }
